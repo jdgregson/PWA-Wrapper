@@ -103,8 +103,8 @@ const sendResponse = async (title, body, token, statusCode) => {
  * @param {string} url The URL to redirect the browser to.
  * @param {number=} statusCode The HTTP status code to send with the response.
  *   Default: 302
- * @return {object} Response object containing instructing the browser to
- *   redirect to the given URL.
+ * @return {object} Response object instructing the browser to redirect to the
+ *   given URL.
  */
 const sendRedirect = async (url, statusCode = 302) => {
   return new Response('', {
@@ -115,6 +115,15 @@ const sendRedirect = async (url, statusCode = 302) => {
   });
 };
 
+/**
+ * Returns a Response object instructing the browser to create an iframe
+ * pointing to a given URL.
+ * @param {string} url The URL to redirect the browser to.
+ * @param {string} title The title to give the returned page.
+ * @param {string} token The token used to fetch the webmanifest.
+ * @return {object} Response object instructing the browser to create an iframe
+ *   pointing to the given URL.
+ */
 const sendIframe = (url, title, token) => {
   const html = `
     <style>
@@ -242,7 +251,7 @@ const getPIN = (request) => {
 /**
  * Takes in HTML content and returns it wrapped in the HTML required to get the
  * PWA working. Title and token will be sanitized. Body will not be sanitized as
- * HTML/JavaScript is expected here.
+ * HTML/JavaScript is expected there.
  * @param {string} Title The title of the page to be returned.
  * @param {string} Body The content of the HTML <body> tag.
  * @param {string} Token The user-provided access token.
